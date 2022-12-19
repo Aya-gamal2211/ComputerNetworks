@@ -5,8 +5,15 @@ if len(sys.argv) <= 1:
     print ('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
     sys.exit(2)
 # Create a server socket, bind it to a port and start listening
-tcpSerSock = socket(AF_INET, SOCK_STREAM)
+tcpSerSock =socket. socket(socket.AF_INET, socket.SOCK_STREAM)
 # Fill in start.
+tcpSerSock.bind((socket.gethostname(), 80)) # Connect to the webserver on port 80
+
+tcpSerSock.listen(0) #can connect up to 5 requests
+while True:
+    # accept connections from outside
+    (clientsocket, address) = tcpSerSock.accept()
+
 # Fill in end.
 while 1:
     # Start receiving data from the client
