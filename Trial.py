@@ -9,9 +9,9 @@ tcpSerSock =socket. socket(socket.AF_INET, socket.SOCK_STREAM)
 # Fill in start.
 tcpSerSock.bind((socket.gethostname(), 80)) # Connect to the webserver on port 80
 
-tcpSerSock.listen(0) #can connect up to 5 requests
+tcpSerSock.listen(5) #can connect up to 5 requests
 while True:
-    # accept connections from outside
+    # accept connections from outside (server socket)
     (clientsocket, address) = tcpSerSock.accept()
 
 # Fill in end.
@@ -20,7 +20,8 @@ while 1:
     print ('\n\nReady to serve...')
     tcpCliSock, addr = tcpSerSock.accept()
     print ('Received a connection from:', addr)
-    message = # Fill in start. 
+    message = tcpCliSock.recv(1024) 
+    
     # Fill in end.
     print (message)
     # Extract the filename from the given message
@@ -39,13 +40,17 @@ while 1:
         tcpCliSock.send("HTTP/1.0 200 OK\r\n")
         tcpCliSock.send("Content-Type:text/html\r\n")
     # Fill in start.
+    # Send the content of the requested file to the client
+        for i in range(0, len(outputdata)):
+            tcpCliSock.send(outputdata[i])
+        
     # Fill in end.
         print ('Read from cache')
     # Error handling for file not found in cache
     except IOError:
         if fileExist == "false":
           # Create a socket on the proxyserver
-            c = # Fill in start. 
+            c = socket(AF_INET, SOCK_STREAM)
             # Fill in end.
             hostn = filename.replace("www.","",1)
             print hostn
@@ -71,6 +76,6 @@ while 1:
             # Fill in start.
             # Fill in end.
             # Close the client and the server sockets
-    tcpCliSock.close()
+            tcpCliSock.close()
 # Fill in start.
 # Fill in end
