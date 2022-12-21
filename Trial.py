@@ -1,9 +1,9 @@
 from socket import *
 import sys, datetime, time
-import requests
+import requests  
 if len(sys.argv) <= 1:
     print ('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
-    sys.exit(2)
+    sys.exit(2) 
 # Create a server socket, bind it to a port and start listening
 tcpSerSock =socket. socket(socket.AF_INET, socket.SOCK_STREAM)
 # Fill in start.
@@ -58,6 +58,7 @@ while True:
             try:
                 # Connect to the socket to port 80
                 # Fill in start.
+                srv = getaddrinfo(hostn, 80)
                 c.connect((hostn,80))
                 print("Connected to port 80")
                 # Fill in end.
@@ -81,9 +82,10 @@ while True:
         else:
             # HTTP response message for file not found
             # Fill in start.
-            
+            print ( "404: File Not Found")
             # Fill in end.
 # Close the client and the server socket
             tcpCliSock.close()
 # Fill in start.
+    main()
 # Fill in end
