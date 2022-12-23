@@ -5,23 +5,20 @@ if len(sys.argv) <= 1:
     print ('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
     sys.exit(2) 
 # Create a server socket, bind it to a port and start listening
-tcpSerSock =socket. socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpSerSock =socket(AF_INET, SOCK_STREAM)
 # Fill in start.
-tcpSerSock.bind((socket.gethostname(), 80)) # Connect to the webserver on port 80
+tcpSerSock.bind((gethostname(), 80)) # Connect to the webserver on port 80
 
-tcpSerSock.listen(5) #can connect up to 5 requests
+tcpSerSock.listen(5) #can queue requests up to 5 requests
 while True:
     # accept connections from outside (server socket)
     (clientsocket, address) = tcpSerSock.accept()
-
-# Fill in end.
-
-
+    # Fill in end.
     # Start receiving data from the client
     print ('\n\nReady to serve...')
     tcpCliSock, addr = tcpSerSock.accept()
     print ('Received a connection from:', addr)
-    message = tcpCliSock.recv(1024) 
+    message = tcpCliSock.recv(1024).decode() #as we want a message of bytes not string
     
     # Fill in end.
     print (message)
@@ -65,12 +62,12 @@ while True:
                 # Create a temporary file on this socket and ask port 80 for the file requested by the client
                 fileobj = c.makefile('r', 0)
                 fileobj.write("GET "+"http://" + filename + " HTTP/1.0\n\n")
-# Read the response into buffer
-# Fill in start.
+                # Read the response into buffer
+                # Fill in start.
                 buffer=fileobj.readlines()
-# Fill in end.
-# Create a new file in the cache for the requested file.
-# Also send the response in the buffer to client socket and the corresponding file in the cache
+                # Fill in end.
+                # Create a new file in the cache for the requested file.
+                # Also send the response in the buffer to client socket and the corresponding file in the cache
                 tmpFile = open("./" + filename,"wb")
                 # Fill in start.\
                 for i in range(0, len(buffer)):
@@ -84,8 +81,7 @@ while True:
             # Fill in start.
             print ( "404: File Not Found")
             # Fill in end.
-# Close the client and the server socket
-            tcpCliSock.close()
+            # Close the client and the server socket
+        tcpCliSock.close()
 # Fill in start.
-    main()
 # Fill in end
