@@ -1,6 +1,7 @@
 from socket import *
 import sys, datetime, time
 import requests  
+
 if len(sys.argv) <= 1:
     print ('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
     sys.exit(2) 
@@ -19,6 +20,14 @@ while True:
     # Start receiving data from the client
     print ('\n\nReady to serve...')
     tcpCliSock, addr = tcpSerSock.accept()
+    # get the request from browser
+    #request = conn.recv(config['MAX_REQUEST_LEN']) 
+
+# parse the first line
+    #first_line = request.split('\n')[0]
+
+# get url
+    #url = first_line.split(' ')[1]
     print ('Received a connection from:', addr)
     message = tcpCliSock.recv(1024).decode() #as we want a message of bytes not string
     
