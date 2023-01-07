@@ -6,10 +6,12 @@ if len(sys.argv) <= 1:
     sys.exit(2) 
 # Create a server socket, bind it to a port and start listening
 tcpSerSock =socket(AF_INET, SOCK_STREAM)
+#Re-use the socket
+tcpSerSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 # Fill in start.
 tcpSerSock.bind((gethostname(), 80)) # Connect to the webserver on port 80
 
-tcpSerSock.listen(5) #can queue requests up to 5 requests
+tcpSerSock.listen(10) #can queue requests up to 10 requests and become a server socket
 while True:
     # accept connections from outside (server socket)
     (clientsocket, address) = tcpSerSock.accept()
