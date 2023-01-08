@@ -91,6 +91,7 @@ while True:
                     # Fill in end.
                 except:
                     tcpCliSock.send(b'HTTP/1.0 404 sendError\r\n')
+                    tcpCliSock.send(b'Content-Type:text/html\r\n')
                     print ("Illegal request")
             else:
                 # Close the client and the server sockets
