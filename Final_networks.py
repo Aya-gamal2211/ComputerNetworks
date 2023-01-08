@@ -90,9 +90,9 @@ while True:
                     c.close()
                     # Fill in end.
                 except:
+                    tcpCliSock.send(b'HTTP/1.0 404 sendError\r\n')
                     print ("Illegal request")
             else:
-                # HTTP response message for file not found
                 # Close the client and the server sockets
                 tcpCliSock.close()
     else :
