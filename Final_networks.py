@@ -5,7 +5,6 @@ def urlFilter(url):
     with open('UrlsFilter.txt','r',encoding='utf-8') as f:
         lines = f.readlines()
         for url in lines:
-            print("the file is blocked")
             return True
         else:
             return False
@@ -32,7 +31,7 @@ while True:
     print (message)
     # Extract the filename from the given message
     print (message.split()[1])
-    if(not(urlFilter(message.split()[1])) and message !=""):
+    if(not urlFilter(message.split()[1]) and message !=""):
         filename = message.split()[1].decode("utf-8").rpartition("/")[2]
         print (filename)
         fileExist = "false"
